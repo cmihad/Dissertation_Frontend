@@ -6,7 +6,7 @@ import HelloWorld from './components/HelloWorld.vue'
 <template>
   <header>
     <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
-
+    <h3 class="text-white font-extrabold text-lg">ahdasd</h3>
     <div class="wrapper">
       <HelloWorld msg="You did it!" />
 
