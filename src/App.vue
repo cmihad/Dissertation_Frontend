@@ -6,7 +6,9 @@ import TheFooter from './components/Navigation/TheFooter.vue'
 
 <template>
   <TheHeader />
-  <RouterView />
+  <div class="container mx-auto py-4">
+    <RouterView />
+  </div>
   <TheFooter />
 </template>
 

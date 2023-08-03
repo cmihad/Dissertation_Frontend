@@ -144,7 +144,7 @@
         </div>
       </div>
     </div>
-    <h4 class="text-lg font-bold text-white text-center">ver1.1</h4>
+    <h4 class="text-lg font-bold text-white text-center">ver1.2</h4>
   </footer>
 </template>
 
