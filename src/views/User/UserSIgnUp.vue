@@ -95,27 +95,20 @@ export default {
   data() {
     return {
       agree: false,
-      confirmPassword: '',
       model: {
-        firstName: '',
-        lastName: '',
-        email: '',
-        phoneNumber: '',
-        password: '',
-        address: '',
-        accountType: 0,
-        city: 'Uk',
-        confirmPassword: '',
-        created: '2023-01-13T13:09:21.491Z'
+        name: 'mih1d03asdasddas',
+        email: 'mihad@yahoo.com33213213',
+        password: '654321',
+        address: ''
       }
     }
   },
   methods: {
     submitForm() {
-      axios.post('https://localhost:7212/api/v1/registeAccount', this.model).then((res) => {
+      axios.post('http://api.mihad.site/user/register', this.model).then((res) => {
         const userInfo = res.data
         localStorage.setItem('userInfo', JSON.stringify(userInfo))
-        this.$router.push({ path: '/' })
+        // this.$router.push({ path: '/' })
       })
     }
   }

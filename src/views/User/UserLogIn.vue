@@ -64,12 +64,16 @@ export default {
     }
   },
   methods: {
-    submitForm() {
-      authService.login(this.model).then((res) => {
-        const userInfo = res.data
-        localStorage.setItem('userInfo', JSON.stringify(userInfo))
+    async submitForm() {
+      try {
+        const res = await authService.login(this.model)
+        const token = res.data.token // Assuming the server returns a token
+        localStorage.setItem('authToken', token)
         this.$router.push({ path: '/' })
-      })
+      } catch (error) {
+        console.error('Error logging in:', error)
+        alert('Failed to log in. Please check your credentials and try again.')
+      }
     }
   }
 }
