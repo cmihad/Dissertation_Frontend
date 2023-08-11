@@ -105,7 +105,7 @@ export default {
   },
   methods: {
     submitForm() {
-      axios.post('http://api.mihad.site/user/register', this.model).then((res) => {
+      axios.post('https://api.mihad.site/user/register', this.model).then((res) => {
         const userInfo = res.data
         localStorage.setItem('userInfo', JSON.stringify(userInfo))
         // this.$router.push({ path: '/' })
