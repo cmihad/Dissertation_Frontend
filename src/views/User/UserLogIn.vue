@@ -2,18 +2,12 @@
   <div>
     <div class="container mx-auto sm:px-10">
       <div class="grid grid-cols-1 gap-4 place-items-center">
-        <!-- BEGIN: Register Info -->
-
-        <!-- END: Register Info -->
-        <!-- BEGIN: Register Form -->
         <div class="xl:h-auto xl:my-10 bg-rgb-white xl:p-16 rounded-lg">
           <div
             class="my-auto mx-auto bg-white xl:bg-transparent px-5 sm:px-8 py-8 xl:p-0 rounded-md shadow-md xl:shadow-none w-full sm:w-3/4 lg:w-3/4 xl:w-11/12"
           >
             <div>
-              <h2 class="intro-x font-bold text-2xl xl:text-3xl text-center xl:text-left">
-                Sign up
-              </h2>
+              <h2 class="intro-x font-bold text-2xl xl:text-3xl text-center xl:text-left">Login</h2>
             </div>
 
             <div class="intro-x mt-8">
@@ -57,7 +51,7 @@
 </template>
 
 <script>
-import axios from 'axios'
+import authService from '../../Requests/authService'
 export default {
   data() {
     return {
@@ -71,7 +65,7 @@ export default {
   },
   methods: {
     submitForm() {
-      axios.post('https://localhost:7212/api/v1/registeAccount', this.model).then((res) => {
+      authService.login(this.model).then((res) => {
         const userInfo = res.data
         localStorage.setItem('userInfo', JSON.stringify(userInfo))
         this.$router.push({ path: '/' })
