@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="container mx-auto sm:px-10">
-      <div class="grid grid-cols-1 gap-4 place-items-center">
+      <div class="grid grid-cols-1 gap-2 place-items-center">
         <!-- BEGIN: Register Info -->
 
         <!-- END: Register Info -->
@@ -24,12 +24,10 @@
                   id="default-input"
                   class="custom_form_input"
                   placeholder="Terry"
+                  v-model="name"
                 />
               </div>
-              <div class="mb-6">
-                <label for="default-input" class="custom_form_label">Name</label>
-                <input type="text" id="default-input" class="custom_form_input" />
-              </div>
+
               <div class="mt-4">
                 <label class="custom_form_label">Email</label>
                 <input
@@ -90,26 +88,29 @@
 </template>
 
 <script>
-import axios from 'axios'
+import authService from '../../Requests/authService'
 export default {
   data() {
     return {
       agree: false,
       model: {
-        name: 'mih1d03asdasddas',
-        email: 'mihad@yahoo.com33213213',
-        password: '654321',
-        address: ''
+        name: '',
+        email: '',
+        password: '',
+        address: '',
+        phone: ''
       }
     }
   },
   methods: {
-    submitForm() {
-      axios.post('https://api.mihad.site/user/register', this.model).then((res) => {
-        const userInfo = res.data
-        localStorage.setItem('userInfo', JSON.stringify(userInfo))
-        // this.$router.push({ path: '/' })
-      })
+    async submitForm() {
+      try {
+        const res = await authService.singUp(this.model)
+        this.$router.push({ path: '/' })
+      } catch (error) {
+        console.error('Error logging in:', error)
+        alert('Failed to register ')
+      }
     }
   }
 }

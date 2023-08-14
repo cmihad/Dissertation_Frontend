@@ -3,6 +3,8 @@ import HomeView from '../views/HomeView.vue'
 import UserSignUp from '../views/User/UserSIgnUp.vue'
 import UserLogin from '../views/User/UserLogIn.vue'
 import Landing from '../views/Landing.vue'
+import UserDashboard from '../views/User/UserDashBoard.vue'
+import AdminDashboard from '../views/Admin/Dashboard.vue'
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -20,6 +22,16 @@ const router = createRouter({
       path: '/user/login',
       name: 'userLogin',
       component: UserLogin
+    },
+    {
+      path: '/user/dashboard',
+      name: 'userDashboard',
+      component: UserDashboard
+    },
+    {
+      path: '/admin/dashboard',
+      name: 'adminDashboard',
+      component: AdminDashboard
     },
     {
       path: '/about',

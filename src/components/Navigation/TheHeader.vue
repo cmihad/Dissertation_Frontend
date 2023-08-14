@@ -71,6 +71,7 @@
           </li>
           <li>
             <a
+              v-if="!isUserLoggedIn"
               href="/user/login"
               class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
               >Login</a
@@ -78,7 +79,11 @@
           </li>
 
           <li>
-            <button class="bg-red-500 hover:bg-red-600 text-white font-semibold py-1 px-2 rounded">
+            <button
+              v-if="isUserLoggedIn"
+              @click="logout()"
+              class="bg-red-500 hover:bg-red-600 text-white font-semibold py-1 px-2 rounded"
+            >
               Logout
             </button>
           </li>
@@ -90,6 +95,16 @@
 
 <script>
 export default {
+  data() {
+    return {
+      isUserLoggedIn: false
+    }
+  },
+  mounted() {
+    const token = localStorage.getItem('authToken')
+    console.log(token)
+    if (token) this.isUserLoggedIn = true
+  },
   methods: {
     logout() {
       localStorage.clear()

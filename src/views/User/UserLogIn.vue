@@ -37,7 +37,7 @@
               <div class="py-8">
                 <button
                   class="btn bg-blue-500 hover:bg-blue-700"
-                  @click="$router.push({ name: 'csLogin' })"
+                  @click="$router.push({ name: 'userSignUp' })"
                 >
                   Don't have an account? Sign Up
                 </button>
@@ -67,9 +67,17 @@ export default {
     async submitForm() {
       try {
         const res = await authService.login(this.model)
-        const token = res.data.token // Assuming the server returns a token
-        localStorage.setItem('authToken', token)
-        this.$router.push({ path: '/' })
+        localStorage.setItem('authToken', res.data.token)
+
+        if (res.data.user.isAdmin) {
+          this.$router.push({ path: '/admin/dashboard' })
+          localStorage.setItem(
+            'admintoken',
+            'oNxM!sUSnF9as3UIqep!!NJhwROzfPd-9-vIRUkUmKDHNaf-!vUbbI!mz1Fa!kY/'
+          )
+        } else {
+          this.$router.push({ path: '/user/dashboard' })
+        }
       } catch (error) {
         console.error('Error logging in:', error)
         alert('Failed to log in. Please check your credentials and try again.')
