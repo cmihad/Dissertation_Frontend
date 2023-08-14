@@ -8,7 +8,8 @@ const adminHeaders = {
 }
 
 const getAllUsers = () => {
-  return axios.get(`${url}/admin/getAllUsers`, adminHeaders)
+  console.log(adminHeaders)
+  return axios.get(`${url}/admin/getAllUsers`, adminHeaders.admintoken)
 }
 
 const deleteUserByEmail = (email) => {
