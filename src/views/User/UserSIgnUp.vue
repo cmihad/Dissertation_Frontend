@@ -73,7 +73,7 @@
               </button>
               <div class="py-8">
                 <button
-                  class="btn bg-blue-500 hover:bg-blue-700"
+                  class="bg-gray-200 p-2 px-4 rounded-lg font-bold text-gray-700 hover:bg-gray-300 shadow-md transition duration-300"
                   @click="$router.push({ name: 'csLogin' })"
                 >
                   Already have an account? Sign in

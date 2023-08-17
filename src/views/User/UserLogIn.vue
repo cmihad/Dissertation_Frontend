@@ -22,7 +22,7 @@
               </div>
 
               <div class="mt-4">
-                <label class="custom_form_label">password</label>
+                <label class="custom_form_label">Password</label>
                 <input
                   type="password"
                   class="custom_form_input"
@@ -35,11 +35,12 @@
             <div class="intro-x mt-5 xl:mt-8 text-center xl:text-left">
               <button class="btn bg-blue-500 hover:bg-blue-700" @click="submitForm">Sign In</button>
               <div class="py-8">
+                <br />
                 <button
-                  class="btn bg-blue-500 hover:bg-blue-700"
+                  class="bg-gray-200 p-2 px-4 rounded-lg font-bold text-gray-700 hover:bg-gray-300 shadow-md transition duration-300"
                   @click="$router.push({ name: 'userSignUp' })"
                 >
-                  Don't have an account? Sign Up
+                  Don't have an account? Register
                 </button>
               </div>
             </div>
@@ -60,14 +61,12 @@ export default {
       model: {
         email: '',
         password: ''
-      }
+      },
+      adminToken: ''
     }
   },
   mounted() {
-    // scrap.scrapeProducts(
-    //   'https://www.superdrug.com/hair/shampoo/anti-dandruff-shampoo/c/pt_hair_anti_dandruff_shampoo'
-    // )
-    console.log('testing')
+    this.adminToken = process.env.VUE_APP_ADMIN_JWT
   },
   methods: {
     async submitForm() {
@@ -77,14 +76,12 @@ export default {
 
         if (res.data.user.isAdmin) {
           this.$router.push({ path: '/admin/dashboard' })
-          localStorage.setItem(
-            'admintoken',
-            'oNxM!sUSnF9as3UIqep!!NJhwROzfPd-9-vIRUkUmKDHNaf-!vUbbI!mz1Fa!kY/'
-          )
+          localStorage.setItem('admintoken', this.adminToken)
         } else {
           this.$router.push({ path: '/user/dashboard' })
         }
       } catch (error) {
+        this.$router.push({ path: '/user/login' })
         console.error('Error logging in:', error)
         alert('Failed to log in. Please check your credentials and try again.')
       }
