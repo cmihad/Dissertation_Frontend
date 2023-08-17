@@ -12,9 +12,16 @@ const singUp = (userCredentials) => {
 const logOut = () => {
   localStorage.clear()
 }
+const closeAccount = () => {
+  const userData = JSON.parse(localStorage.getItem('userData'))
+  const authToken = localStorage.getItem('authToken')
+
+  return axios.delete(`${url}/closeAccount?email=${userData.email}`, authToken)
+}
 
 export default {
   login,
   singUp,
-  logOut
+  logOut,
+  closeAccount
 }

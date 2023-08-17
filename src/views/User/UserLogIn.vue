@@ -66,12 +66,15 @@ export default {
     }
   },
   mounted() {
-    this.adminToken = process.env.VUE_APP_ADMIN_JWT
+    this.adminToken = import.meta.env.VITE_ADMIN_JWT
   },
   methods: {
     async submitForm() {
       try {
         const res = await authService.login(this.model)
+        console.log(res.data.user)
+
+        localStorage.setItem('userData', JSON.stringify(res.data.user))
         localStorage.setItem('authToken', res.data.token)
 
         if (res.data.user.isAdmin) {
