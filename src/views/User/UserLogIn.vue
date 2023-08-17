@@ -63,6 +63,12 @@ export default {
       }
     }
   },
+  mounted() {
+    // scrap.scrapeProducts(
+    //   'https://www.superdrug.com/hair/shampoo/anti-dandruff-shampoo/c/pt_hair_anti_dandruff_shampoo'
+    // )
+    console.log('testing')
+  },
   methods: {
     async submitForm() {
       try {

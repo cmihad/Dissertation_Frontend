@@ -1,6 +1,8 @@
 import axios from 'axios'
 
-const url = 'https://api.mihad.site'
+// const url = 'https://api.mihad.site'
+const url = 'http://localhost:5000'
+
 const login = (userCredentials) => {
   return axios.post(`${url}/user/login`, userCredentials)
 }

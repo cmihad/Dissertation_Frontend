@@ -1,9 +1,17 @@
 <template>
-  <h2>user dashboard</h2>
+  <div class="">
+    <h2>user dashboard</h2>
+    <search />
+  </div>
 </template>
 
 <script>
-export default {}
+import search from '../../components/Search.vue'
+export default {
+  components: {
+    search
+  }
+}
 </script>
 
 <style></style>

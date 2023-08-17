@@ -6,8 +6,10 @@ import TheFooter from './components/Navigation/TheFooter.vue'
 
 <template>
   <TheHeader />
-  <div class="container mx-auto py-4">
-    <RouterView />
+  <div class="max-w-screen-xl mx-auto py-4">
+    <div class="container">
+      <RouterView />
+    </div>
   </div>
   <TheFooter />
 </template>
