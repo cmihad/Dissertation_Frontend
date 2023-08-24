@@ -1,6 +1,6 @@
 <template>
   <div class="container mx-auto">
-    <div class="">Admin Dashboard</div>
+    <div class="title_text">Admin Dashboard</div>
     <h2 class="center font-bold text-lg">Total number of user {{ totalUser }}</h2>
     <table>
       <thead>

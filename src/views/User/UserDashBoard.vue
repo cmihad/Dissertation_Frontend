@@ -1,22 +1,31 @@
 <template>
   <div class="">
-    <h2>user dashboard</h2>
+    <h1 class="title_text">user dashboard</h1>
+
     <div>
       <div class="tabs">
         <button @click="activeTab = 'search'" :class="{ active: activeTab === 'search' }">
-          search
+          <h4 class="sub_title_text">search</h4>
         </button>
         <button
           @click="activeTab = 'UserInfoUpdate'"
           :class="{ active: activeTab === 'UserInfoUpdate' }"
         >
-          User Info Update
+          <h4 class="sub_title_text">User Info Update</h4>
+        </button>
+        <button @click="activeTab = 'orders'" :class="{ active: activeTab === 'orders' }">
+          <h4 class="sub_title_text">Previous Orders</h4>
         </button>
       </div>
       <div class="tab-content">
         <search v-if="activeTab === 'search'"></search>
         <UserInfoUpdate v-if="activeTab === 'UserInfoUpdate'"></UserInfoUpdate>
+        <orders v-if="activeTab === 'orders'"></orders>
       </div>
+      <!-- <div class="tab-content">
+        <search v-if="activeTab === 'search'"></search>
+        <UserInfoUpdate v-if="activeTab === 'UserInfoUpdate'"></UserInfoUpdate>
+      </div> -->
     </div>
     <div class="intro-x mt-5 xl:mt-8 text-center xl:text-left">
       <div class="py-8">
@@ -29,8 +38,8 @@
 
 <script>
 import search from '../../components/Search.vue'
-import authService from '../../Requests/authService'
 import UserInfoUpdate from './UserInfoUpdate.vue'
+import orders from './Orders.vue'
 
 export default {
   data() {
@@ -40,7 +49,8 @@ export default {
   },
   components: {
     search,
-    UserInfoUpdate
+    UserInfoUpdate,
+    orders
   }
 }
 </script>

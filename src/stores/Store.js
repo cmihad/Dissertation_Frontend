@@ -2,7 +2,8 @@ import Vuex from 'vuex'
 
 export default new Vuex.Store({
   state: {
-    isLoggedIn: false
+    isLoggedIn: false,
+    adminToken: ''
     // your state here
   },
   mutations: {

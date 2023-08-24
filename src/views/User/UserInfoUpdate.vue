@@ -50,7 +50,7 @@
               />
             </div>
 
-            <div class="mt-4">
+            <div class="mt-4" v-if="profile">
               <label class="custom_form_label">Skin Info</label>
               <input
                 type="text"
@@ -64,7 +64,7 @@
               <label class="custom_form_label">Allergies</label>
             </div>
 
-            <div class="mt-4">
+            <div class="mt-4" v-if="profile">
               <label class="custom_form_label">Skin Info</label>
               <input
                 type="text"
@@ -74,7 +74,7 @@
               />
             </div>
 
-            <div class="mt-4">
+            <div class="mt-4" v-if="profile">
               <label class="custom_form_label">Hair Info</label>
               <input
                 type="text"
@@ -84,7 +84,7 @@
               />
             </div>
 
-            <div class="mt-4">
+            <div class="mt-4" v-if="profile">
               <label class="custom_form_label">Postal Code</label>
               <input
                 type="text"
@@ -94,7 +94,7 @@
               />
             </div>
 
-            <div class="mt-4">
+            <div class="mt-4" v-if="profile">
               <label class="custom_form_label">Annual Income</label>
               <input
                 type="text"
@@ -104,7 +104,7 @@
               />
             </div>
 
-            <div class="mt-4">
+            <div class="mt-4" v-if="profile">
               <label class="custom_form_label">Gender</label>
               <select class="custom_form_input" v-model="profile.gender">
                 <option value="Male">Male</option>
@@ -112,7 +112,7 @@
               </select>
             </div>
 
-            <div class="mt-4">
+            <div class="mt-4" v-if="profile">
               <label class="custom_form_label">Ethnicity</label>
               <input
                 type="text"
@@ -122,7 +122,7 @@
               />
             </div>
 
-            <div class="mt-4">
+            <div class="mt-4" v-if="profile">
               <label class="custom_form_label">Is College Graduate?</label>
               <input
                 type="checkbox"
@@ -174,7 +174,6 @@ export default {
       }
     }
   },
-  props: ['initialData'],
   created() {
     this.userData = this.initialData.userData
     this.profile = this.initialData.userData.profile

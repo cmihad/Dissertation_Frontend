@@ -26,6 +26,12 @@ const getUserData = () => {
 const updateUserInfo = (data) => {
   return axios.post(`${url}/user/profileUpdate`, data)
 }
+const getOrdersById = (data) => {
+  return axios.get(`${url}/order/${data}`)
+}
+const purchasedAnProduct = (data) => {
+  return axios.post(`${url}/order/create`, data)
+}
 
 export default {
   login,
@@ -33,5 +39,7 @@ export default {
   logOut,
   closeAccount,
   getUserData,
-  updateUserInfo
+  updateUserInfo,
+  getOrdersById,
+  purchasedAnProduct
 }
