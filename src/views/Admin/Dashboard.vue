@@ -40,7 +40,8 @@ export default {
   },
 
   mounted() {
-    setTimeout(() => {
+    const token = localStorage.getItem('admintoken')
+    if (token) {
       const user = adminAuth.getAllUsers()
       user.then((data) => {
         this.users = data.data
@@ -48,7 +49,7 @@ export default {
 
       const numberOfUsers = adminAuth.getNumberOfUsers()
       numberOfUsers.then((data) => (this.totalUser = data.data))
-    }, 500)
+    }
   },
 
   methods: {

@@ -78,12 +78,6 @@
               </button>
             </router-link>
           </li>
-          <!-- <li>
-            <pre class="text-white">{{ $data }}</pre>
-          </li> -->
-          <li class="text-white">
-            {{ isLoggedIn }}
-          </li>
         </ul>
       </div>
     </div>
@@ -100,17 +94,14 @@ export default {
   },
   mounted() {
     if (localStorage.getItem('userData')) {
-      console.log('went inside to check')
-      this.isUserLoggedIn = true
+      this.$store.commit('login')
     }
   },
   methods: {
     logout() {
       localStorage.clear()
       this.$store.commit('logout')
-
       this.$router.push({ path: '/user/login' })
-      console.log('loggiin out')
     }
   },
   computed: {

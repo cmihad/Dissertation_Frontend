@@ -67,36 +67,37 @@ export default {
     this.adminToken = import.meta.env.VITE_ADMIN_JWT
   },
   methods: {
-    async submitForm() {
+    submitForm() {
       try {
-        const res = await authService.login(this.model)
+        const res = authService.login(this.model)
+        res.then((data) => {
+          console.log(data)
+          localStorage.setItem('userData', JSON.stringify(data.data.userData))
+          localStorage.setItem('authToken', data.data.token)
+          if (data.data.userData.isAdmin) {
+            localStorage.setItem('admintoken', this.adminToken)
+            this.$store.commit('login')
 
-        localStorage.setItem('userData', JSON.stringify(res.data.userData))
-        localStorage.setItem('authToken', res.data.token)
-
-        if (res.data.userData.isAdmin) {
-          // this.$router.push({ path: '/admin/dashboard' })
-          localStorage.setItem('admintoken', this.adminToken)
-          setTimeout(() => {}, 200)
-          this.$toast.open({
-            message: `successfully logged in as an admin go to dashboard to see the users`,
-            type: 'success',
-            position: 'top-right'
-          })
-          this.$store.commit('login')
-          this.$router.push({ path: '/admin/dashboard' })
-        } else {
-          this.$router.push({ path: '/user/dashboard' })
-          this.$store.commit('login')
-          this.$toast.open({
-            message: `successfully logged in `,
-            type: 'success',
-            position: 'top-right'
-          })
-        }
+            this.$router.push({ path: '/admin/dashboard' })
+            this.$toast
+              .open({
+                message: `successfully logged in as an admin go to dashboard to see the users`,
+                type: 'success',
+                position: 'top-right'
+              })
+              .then((e) => {})
+          } else {
+            this.$router.push({ path: '/user/dashboard' })
+            this.$store.commit('login')
+            this.$toast.open({
+              message: `successfully logged in `,
+              type: 'success',
+              position: 'top-right'
+            })
+          }
+        })
       } catch (error) {
         this.$router.push({ path: '/user/login' })
-
         this.$toast.open({
           message: `Error: ${error.message}`,
           type: 'error',
