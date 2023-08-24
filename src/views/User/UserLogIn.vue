@@ -56,8 +56,6 @@ import authService from '../../Requests/authService'
 export default {
   data() {
     return {
-      agree: false,
-      confirmPassword: '',
       model: {
         email: '',
         password: ''
@@ -72,21 +70,38 @@ export default {
     async submitForm() {
       try {
         const res = await authService.login(this.model)
-        console.log(res.data.user)
 
-        localStorage.setItem('userData', JSON.stringify(res.data.user))
+        localStorage.setItem('userData', JSON.stringify(res.data.userData))
         localStorage.setItem('authToken', res.data.token)
 
-        if (res.data.user.isAdmin) {
-          this.$router.push({ path: '/admin/dashboard' })
+        if (res.data.userData.isAdmin) {
+          // this.$router.push({ path: '/admin/dashboard' })
           localStorage.setItem('admintoken', this.adminToken)
+          setTimeout(() => {}, 200)
+          this.$toast.open({
+            message: `successfully logged in as an admin go to dashboard to see the users`,
+            type: 'success',
+            position: 'top-right'
+          })
+          this.$store.commit('login')
+          this.$router.push({ path: '/admin/dashboard' })
         } else {
           this.$router.push({ path: '/user/dashboard' })
+          this.$store.commit('login')
+          this.$toast.open({
+            message: `successfully logged in `,
+            type: 'success',
+            position: 'top-right'
+          })
         }
       } catch (error) {
         this.$router.push({ path: '/user/login' })
-        console.error('Error logging in:', error)
-        alert('Failed to log in. Please check your credentials and try again.')
+
+        this.$toast.open({
+          message: `Error: ${error.message}`,
+          type: 'error',
+          position: 'top-right'
+        })
       }
     }
   }

@@ -38,13 +38,17 @@ export default {
       totalUser: ''
     }
   },
+
   mounted() {
-    const user = adminAuth.getAllUsers()
-    user.then((data) => {
-      this.users = data.data
-    })
-    const numberOfUsers = adminAuth.getNumberOfUsers()
-    numberOfUsers.then((data) => (this.totalUser = data.data))
+    setTimeout(() => {
+      const user = adminAuth.getAllUsers()
+      user.then((data) => {
+        this.users = data.data
+      })
+
+      const numberOfUsers = adminAuth.getNumberOfUsers()
+      numberOfUsers.then((data) => (this.totalUser = data.data))
+    }, 500)
   },
 
   methods: {

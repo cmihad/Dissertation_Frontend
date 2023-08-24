@@ -62,7 +62,7 @@
                   type="password"
                   class="custom_form_input"
                   placeholder="Confirm Password"
-                  v-model="ConfirmPassword"
+                  v-model="model.confirmPassword"
                 />
               </div>
             </div>
@@ -97,6 +97,7 @@ export default {
         name: '',
         email: '',
         password: '',
+        confirmPassword: '',
         address: '',
         phone: ''
       }
@@ -104,12 +105,29 @@ export default {
   },
   methods: {
     async submitForm() {
-      try {
-        const res = await authService.singUp(this.model)
-        this.$router.push({ path: '/' })
-      } catch (error) {
-        console.error('Error logging in:', error)
-        alert('Failed to register ')
+      if (this.model.password === this.model.confirmPassword) {
+        this.agree = true
+      } else {
+        this.$toast.open({
+          message: `Password Does not match`,
+          type: 'error',
+          position: 'top-right'
+        })
+      }
+
+      if (this.agree) {
+        try {
+          const res = await authService.singUp(this.model)
+          this.$router.push({ path: '/user/login' })
+          this.$toast.open({
+            message: `successfully Registered You can login to your account `,
+            type: 'success',
+            position: 'top-right'
+          })
+        } catch (error) {
+          console.error('Error logging in:', error)
+          alert('Failed to register ')
+        }
       }
     }
   }

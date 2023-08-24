@@ -18,10 +18,20 @@ const closeAccount = () => {
 
   return axios.delete(`${url}/closeAccount?email=${userData.email}`, authToken)
 }
+const getUserData = () => {
+  const userData = JSON.parse(localStorage.getItem('userData'))
+
+  return axios.get(`${url}/user/profileByEmail?email=${userData.email}`)
+}
+const updateUserInfo = (data) => {
+  return axios.post(`${url}/user/profileUpdate`, data)
+}
 
 export default {
   login,
   singUp,
   logOut,
-  closeAccount
+  closeAccount,
+  getUserData,
+  updateUserInfo
 }

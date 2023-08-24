@@ -34,7 +34,7 @@
         >
           <li>
             <a
-              href="#"
+              href="/"
               class="block py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent md md:p-0 text-white md:text-blue-500"
               aria-current="page"
               >Home</a
@@ -47,44 +47,42 @@
               >About</a
             >
           </li>
+
           <li>
-            <a
-              href="#"
-              class="block py-2 pl-3 pr-4 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 text-white md:dark:hover:text-blue-500 hover:bg-gray-700 hover:text-white md:hover:bg-transparent"
-              >Services</a
-            >
-          </li>
-          <li>
-            <a
-              href="#"
-              class="block py-2 pl-3 pr-4 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 text-white md:hover:text-blue-500 hover:bg-gray-700 hover:text-white md:dark:hover:bg-transparent"
-              >Pricing</a
-            >
-          </li>
-          <li>
-            <a
-              href="#"
-              class="block py-2 pl-3 pr-4 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 text-white md:hover:text-blue-500 hover:bg-gray-700 hover:text-white md:hover:bg-transparent"
-              >Contact</a
-            >
-          </li>
-          <li>
-            <a
-              v-if="!isUserLoggedIn"
-              href="/user/login"
-              class="block py-2 pl-3 pr-4 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 text-white md:hover:text-blue-500 hover:bg-gray-700 hover:text-white md:hover:bg-transparent"
-              >Login</a
-            >
+            <router-link to="user/dashboard">
+              <a
+                href=""
+                class="block py-2 pl-3 pr-4 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 text-white md:dark:hover:text-blue-500 hover:bg-gray-700 hover:text-white md:hover:bg-transparent"
+                >Dashboard</a
+              >
+            </router-link>
           </li>
 
           <li>
-            <button
-              v-if="isUserLoggedIn"
-              @click="logout()"
-              class="bg-red-500 hover:bg-red-600 text-white font-semibold py-1 px-2 rounded"
+            <router-link
+              to="/user/login"
+              v-if="!isLoggedIn"
+              class="block py-2 pl-3 pr-4 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 text-white md:dark:hover:text-blue-500 hover:bg-gray-700 hover:text-white md:hover:bg-transparent"
             >
-              Logout
-            </button>
+              <button class="w-full text-left">Login</button>
+            </router-link>
+          </li>
+
+          <li>
+            <router-link to="/user/login" v-if="isLoggedIn">
+              <button
+                @click.prevent="logout()"
+                class="bg-red-500 hover:bg-red-600 text-white font-semibold py-1 px-2 rounded"
+              >
+                Logout
+              </button>
+            </router-link>
+          </li>
+          <!-- <li>
+            <pre class="text-white">{{ $data }}</pre>
+          </li> -->
+          <li class="text-white">
+            {{ isLoggedIn }}
           </li>
         </ul>
       </div>
@@ -93,6 +91,7 @@
 </template>
 
 <script>
+import { computed } from 'vue'
 export default {
   data() {
     return {
@@ -100,14 +99,23 @@ export default {
     }
   },
   mounted() {
-    const token = localStorage.getItem('authToken')
-    console.log(token)
-    if (token) this.isUserLoggedIn = true
+    if (localStorage.getItem('userData')) {
+      console.log('went inside to check')
+      this.isUserLoggedIn = true
+    }
   },
   methods: {
     logout() {
       localStorage.clear()
+      this.$store.commit('logout')
+
       this.$router.push({ path: '/user/login' })
+      console.log('loggiin out')
+    }
+  },
+  computed: {
+    isLoggedIn() {
+      return this.$store.state.isLoggedIn
     }
   }
 }
