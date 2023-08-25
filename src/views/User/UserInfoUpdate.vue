@@ -50,38 +50,36 @@
               />
             </div>
 
-            <div class="mt-4" v-if="profile">
-              <label class="custom_form_label">Skin Info</label>
-              <input
-                type="text"
-                class="custom_form_input"
-                placeholder="Normal skin type"
-                v-model="profile.skinInfo"
-              />
-            </div>
-
             <div class="mt-4">
               <label class="custom_form_label">Allergies</label>
             </div>
 
-            <div class="mt-4" v-if="profile">
+            <div class="mt-4">
               <label class="custom_form_label">Skin Info</label>
-              <input
-                type="text"
-                class="custom_form_input"
-                placeholder="Normal skin type"
+              <select
                 v-model="profile.skinInfo"
-              />
+                id="skinInfo"
+                name="skinInfo"
+                class="custom_form_input"
+              >
+                <option value="Normal">Normal</option>
+                <option value="Oily">Oily</option>
+                <option value="Dry">Dry</option>
+              </select>
             </div>
 
             <div class="mt-4" v-if="profile">
               <label class="custom_form_label">Hair Info</label>
-              <input
-                type="text"
-                class="custom_form_input"
-                placeholder="Short"
+              <select
                 v-model="profile.hairInfo"
-              />
+                class="custom_form_input"
+                id="hairInfo"
+                name="hairInfo"
+              >
+                <option value="Short">Oily</option>
+                <option value="Long">Dry</option>
+                <option value="Curly">Dandruff</option>
+              </select>
             </div>
 
             <div class="mt-4" v-if="profile">
@@ -122,7 +120,7 @@
               />
             </div>
 
-            <div class="mt-4" v-if="profile">
+            <div class="mt-4">
               <label class="custom_form_label">Is College Graduate?</label>
               <input
                 type="checkbox"
@@ -137,9 +135,6 @@
               Save Changes
             </button>
           </div>
-          <!-- <pre>
-            {{ $data.userData }}
-          </pre> -->
         </div>
       </div>
     </div>
@@ -169,15 +164,12 @@ export default {
         annualIncome: '',
         gender: '',
         ethnicity: '',
-        isCollegeGraduate: ''
+        isCollegeGraduate: false
         // ... other fields
       }
     }
   },
-  created() {
-    this.userData = this.initialData.userData
-    this.profile = this.initialData.userData.profile
-  },
+
   methods: {
     submitForm() {
       authService.updateUserInfo(this.profile).then((res) => {
@@ -195,7 +187,22 @@ export default {
     const response = authService.getUserData()
     response.then((res) => {
       this.userData = res.data.userData
-      this.profile = res.data.userData.profile
+      if (this.profile === null) {
+        this.profile = res.data.userData.profile
+      } else {
+        this.profile = {
+          id: null,
+          userId: null,
+          allergies: [],
+          skinInfo: '',
+          hairInfo: '',
+          postalCode: '',
+          annualIncome: '',
+          gender: '',
+          ethnicity: '',
+          isCollegeGraduate: false
+        }
+      }
     })
   }
 }

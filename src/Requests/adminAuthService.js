@@ -9,7 +9,6 @@ const adminHeaders = {
 }
 
 const getAllUsers = () => {
-  console.log(adminHeaders)
   return axios.get(`${url}/admin/getAllUsers`, adminHeaders)
 }
 

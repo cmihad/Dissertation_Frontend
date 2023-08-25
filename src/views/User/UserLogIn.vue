@@ -34,6 +34,7 @@
 
             <div class="intro-x mt-5 xl:mt-8 text-center xl:text-left">
               <button class="btn bg-blue-500 hover:bg-blue-700" @click="submitForm">Sign In</button>
+
               <div class="py-8">
                 <br />
                 <button
@@ -53,6 +54,7 @@
 
 <script>
 import authService from '../../Requests/authService'
+
 export default {
   data() {
     return {
@@ -67,43 +69,49 @@ export default {
     this.adminToken = import.meta.env.VITE_ADMIN_JWT
   },
   methods: {
-    submitForm() {
+    async submitForm() {
       try {
-        const res = authService.login(this.model)
-        res.then((data) => {
-          console.log(data)
-          localStorage.setItem('userData', JSON.stringify(data.data.userData))
-          localStorage.setItem('authToken', data.data.token)
-          if (data.data.userData.isAdmin) {
-            localStorage.setItem('admintoken', this.adminToken)
-            this.$store.commit('login')
-
-            this.$router.push({ path: '/admin/dashboard' })
-            this.$toast
-              .open({
-                message: `successfully logged in as an admin go to dashboard to see the users`,
-                type: 'success',
-                position: 'top-right'
-              })
-              .then((e) => {})
-          } else {
-            this.$router.push({ path: '/user/dashboard' })
-            this.$store.commit('login')
-            this.$toast.open({
-              message: `successfully logged in `,
-              type: 'success',
-              position: 'top-right'
-            })
-          }
-        })
+        const data = await authService.login(this.model)
+        this.handleLoginSuccess(data)
       } catch (error) {
-        this.$router.push({ path: '/user/login' })
-        this.$toast.open({
-          message: `Error: ${error.message}`,
-          type: 'error',
-          position: 'top-right'
-        })
+        this.handleLoginFailure()
       }
+    },
+    handleLoginSuccess(data) {
+      localStorage.setItem('userData', JSON.stringify(data.data.userData))
+      localStorage.setItem('authToken', data.data.token)
+      if (data.data.userData.isAdmin) {
+        this.handleAdminLogin()
+      } else {
+        this.handleUserLogin()
+      }
+    },
+    handleLoginFailure() {
+      this.$router.push({ path: '/user/login' })
+      this.$toast.open({
+        message: `Error: Email or Password is wrong`,
+        type: 'error',
+        position: 'top-right'
+      })
+    },
+    handleAdminLogin() {
+      localStorage.setItem('admintoken', this.adminToken)
+      this.$store.commit('login')
+      this.$router.push({ path: '/admin/dashboard' })
+      this.$toast.open({
+        message: `successfully logged in as an admin go to dashboard to see the users`,
+        type: 'success',
+        position: 'top-right'
+      })
+    },
+    handleUserLogin() {
+      this.$router.push({ path: '/user/dashboard' })
+      this.$store.commit('login')
+      this.$toast.open({
+        message: `successfully logged in `,
+        type: 'success',
+        position: 'top-right'
+      })
     }
   }
 }

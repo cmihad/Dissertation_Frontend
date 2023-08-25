@@ -13,15 +13,18 @@
       >
         Buy
       </button>
+      <Modal v-model:showModal="showModal" @purchaseConfirmed="handlePurchaseConfirmation" />
     </div>
   </div>
 </template>
 
 <script>
 import authService from '../../Requests/authService'
+import Modal from './Modal.vue'
 export default {
   data() {
     return {
+      showModal: false,
       submitObj: {
         userId: '',
         userEmail: '',
@@ -30,6 +33,9 @@ export default {
         url: ''
       }
     }
+  },
+  components: {
+    Modal
   },
   computed: {
     itemDetails() {
@@ -73,10 +79,15 @@ export default {
   },
   methods: {
     handleClick() {
-      this.submitObj.productName = this.itemDetails.productName
-      this.submitObj.price = this.itemDetails.price
-      this.submitObj.url = this.itemDetails.url
-      authService.purchasedAnProduct(this.submitObj)
+      this.showModal = true
+    },
+    handlePurchaseConfirmation(value) {
+      if (value) {
+        this.submitObj.productName = this.itemDetails.productName
+        this.submitObj.price = this.itemDetails.price
+        this.submitObj.url = this.itemDetails.url
+        authService.purchasedAnProduct(this.submitObj)
+      }
     }
   }
 }

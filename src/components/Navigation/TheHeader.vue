@@ -12,6 +12,7 @@
         class="inline-flex items-center p-2 ml-3 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
         aria-controls="navbar-default"
         aria-expanded="false"
+        @click="toggleMenu"
       >
         <span class="sr-only">Open main menu</span>
         <svg
@@ -69,6 +70,16 @@
           </li>
 
           <li>
+            <router-link
+              to="/user/register"
+              v-if="!isLoggedIn"
+              class="block py-2 pl-3 pr-4 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 text-white md:dark:hover:text-blue-500 hover:bg-gray-700 hover:text-white md:hover:bg-transparent"
+            >
+              <button class="w-full text-left">Sign Up</button>
+            </router-link>
+          </li>
+
+          <li>
             <router-link to="/user/login" v-if="isLoggedIn">
               <button
                 @click.prevent="logout()"
@@ -85,11 +96,11 @@
 </template>
 
 <script>
-import { computed } from 'vue'
 export default {
   data() {
     return {
-      isUserLoggedIn: false
+      isUserLoggedIn: false,
+      isMenuOpen: false
     }
   },
   mounted() {
@@ -98,6 +109,12 @@ export default {
     }
   },
   methods: {
+    toggleMenu() {
+      console.log('methods clicked')
+
+      this.isMenuOpen = !this.isMenuOpen
+      console.log(this.isMenuOpen)
+    },
     logout() {
       localStorage.clear()
       this.$store.commit('logout')

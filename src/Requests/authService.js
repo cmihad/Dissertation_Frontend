@@ -32,6 +32,12 @@ const getOrdersById = (data) => {
 const purchasedAnProduct = (data) => {
   return axios.post(`${url}/order/create`, data)
 }
+const searchedAnProduct = (data) => {
+  return axios.post(`${url}/searched/create`, data)
+}
+const getSearchData = (data) => {
+  return axios.get(`${url}/searched/${data}`)
+}
 
 export default {
   login,
@@ -41,5 +47,7 @@ export default {
   getUserData,
   updateUserInfo,
   getOrdersById,
-  purchasedAnProduct
+  purchasedAnProduct,
+  searchedAnProduct,
+  getSearchData
 }

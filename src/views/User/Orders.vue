@@ -1,7 +1,7 @@
 <template>
   <div class="container mx-auto">
-    <div class="">Admin Dashboard</div>
-    <h2 class="center font-bold text-lg">Total number of user {{ totalUser }}</h2>
+    <div class="">Previous Orders</div>
+    <h2 class="center font-bold text-lg">Total amount spent {{ totalSpent }}</h2>
     <table>
       <thead>
         <tr>
@@ -34,13 +34,19 @@ import helper from '../../helper/helper'
 export default {
   data() {
     return {
-      orders: []
+      orders: [],
+      totalSpent: 0
     }
   },
 
   async created() {
     const res = await authService.getOrdersById(4)
-    this.orders = res.data.data.orders
+    this.orders = res.data.data.orders.sort((a, b) => {
+      return new Date(b.purchaseDate) - new Date(a.purchaseDate)
+    })
+    this.totalSpent = this.orders.reduce((total, order) => {
+      return total + parseFloat(order.price)
+    }, 0)
   },
   methods: {
     formatDate(date) {
