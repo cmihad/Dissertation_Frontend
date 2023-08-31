@@ -2,9 +2,11 @@
   <nav class="border-gray-200 bg-gray-900">
     <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
       <a href="/" class="flex items-center">
+        <img src="../../assets//logoMain.png" alt="" style="max-width: 200px; max-height: 44px" />
+        <!--
         <span class="self-center text-2xl font-semibold whitespace-nowrap text-white"
           >Recommend Me</span
-        >
+        > -->
       </a>
       <button
         data-collapse-toggle="navbar-default"

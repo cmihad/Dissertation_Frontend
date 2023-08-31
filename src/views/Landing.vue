@@ -1,13 +1,12 @@
 <template>
   <div class="landing">
     <div class="content">
-      <h1>Welcome to Recommend Me Software</h1>
-      <h2>Discover the Right Tools for the Job</h2>
-      <p>
-        Take the guesswork out of choosing software. Our proprietary recommendation engine helps you
-        find the perfect software for your unique needs.
-      </p>
-      <button @click="navigateToRecommendations">Get Started</button>
+      <h1 class="text-white">
+        Welcome to Recommend Me: An Academic Software Recommendation Engine
+      </h1>
+      <h2 class="text-white">Recommend Me Quickly: Fast, Accurate, Personalized</h2>
+
+      <button @click="login">Login to get started</button>
     </div>
   </div>
 </template>
@@ -16,8 +15,8 @@
 export default {
   name: 'LandingPage',
   methods: {
-    navigateToRecommendations() {
-      this.$router.push('/recommendations')
+    login() {
+      this.$router.push('user/login')
     }
   }
 }
@@ -25,11 +24,17 @@ export default {
 
 <style scoped>
 .landing {
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.7), rgba(169, 169, 169, 0.7)),
+    url('https://images.unsplash.com/photo-1596462502278-27bfdc403348?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2080&q=80')
+      center center no-repeat;
+  background-size: cover;
+
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background: #fafafa;
+  /* background: url('https://images.unsplash.com/photo-1596462502278-27bfdc403348?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2080&q=80')
+    center center no-repeat; */
   font-family: Arial, sans-serif;
   color: #333;
 }
