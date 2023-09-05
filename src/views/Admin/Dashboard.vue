@@ -1,8 +1,8 @@
 <template>
   <div class="container mx-auto">
     <div class="title_text">Admin Dashboard</div>
-    <h2 class="center font-bold text-lg">Total number of user {{ totalUser }}</h2>
-    <table>
+    <h2 class="font-bold text-2xl">Total number of user {{ totalUser }}</h2>
+    <table class="md:mb-32" v-if="users">
       <thead>
         <tr>
           <th>ID</th>
