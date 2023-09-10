@@ -76,9 +76,9 @@
                 id="hairInfo"
                 name="hairInfo"
               >
-                <option value="Short">Oily</option>
-                <option value="Long">Dry</option>
-                <option value="Curly">Dandruff</option>
+                <option value="Oily">Oily</option>
+                <option value="Dry">Dry</option>
+                <option value="Dandruff">Dandruff</option>
               </select>
             </div>
 
@@ -152,7 +152,6 @@ export default {
         email: '',
         address: '',
         phoneNumber: ''
-        // ... other fields
       },
       profile: {
         id: null,
@@ -165,7 +164,6 @@ export default {
         gender: '',
         ethnicity: '',
         isCollegeGraduate: false
-        // ... other fields
       }
     }
   },
@@ -179,6 +177,10 @@ export default {
             type: 'success',
             position: 'top-right'
           })
+          const response = authService.getUserData()
+          response.then((res) => {
+            this.userData = res.data.userData
+          })
         }
       })
     }
@@ -187,12 +189,14 @@ export default {
     const response = authService.getUserData()
     response.then((res) => {
       this.userData = res.data.userData
-      if (this.profile === null) {
+
+      // this.profile = res.data.userData.profile
+      if (this.profile !== null) {
         this.profile = res.data.userData.profile
       } else {
         this.profile = {
-          id: null,
-          userId: null,
+          id: '',
+          userId: res.data.userData.id,
           allergies: [],
           skinInfo: '',
           hairInfo: '',

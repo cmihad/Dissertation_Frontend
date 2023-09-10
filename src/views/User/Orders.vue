@@ -1,5 +1,11 @@
 <template>
-  <div class="container mx-auto">
+  <pre>
+    {{ orders }}
+  </pre>
+  <div class="" v-if="orders.length === 0">
+    <div class="">There is no Previous Orders</div>
+  </div>
+  <div class="container mx-auto" v-else>
     <div class="">Previous Orders</div>
     <h2 class="center font-bold text-lg">Total amount spent {{ totalSpent }}</h2>
     <table>
@@ -9,7 +15,7 @@
           <th>Product Price</th>
           <th>Purchase Date</th>
           <th>Buy Again</th>
-          <th>Review</th>
+          <!-- <th>Review</th> -->
         </tr>
       </thead>
       <tbody>
@@ -21,7 +27,7 @@
           <td>
             <button @click="removeUser(i.url)">Buy Again</button>
           </td>
-          <td>{{ i.purchaseDate }}</td>
+          <!-- <td>{{ i.purchaseDate }}</td> -->
         </tr>
       </tbody>
     </table>
@@ -86,7 +92,7 @@ tr:hover {
 }
 
 button {
-  background-color: #f44336; /* Red */
+  background-color: #1e90ff;
   color: white;
   border: none;
   padding: 8px 16px;
@@ -94,9 +100,5 @@ button {
   border-radius: 4px;
   font-size: 14px;
   transition: background-color 0.3s;
-}
-
-button:hover {
-  background-color: #d32f2f; /* Darker red on hover */
 }
 </style>
