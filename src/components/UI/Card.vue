@@ -1,15 +1,17 @@
 <template>
-  <div class="max-w-sm rounded overflow-hidden shadow-lg bg-white">
-    <img class="w-full h-48 object-cover" :src="item.productImage" alt="Card Image" />
-    <div class="px-6 py-4">
-      <h3 class="font-bold text-xl mb-2">{{ item.productName }}</h3>
-      <p class="text-gray-700 text-base">{{ item.price }}</p>
-      <!-- <p class="text-gray-700 text-base">{{ item.pricePerUnit }}</p> -->
+  <div class="max-w-sm h-full flex flex-col rounded overflow-hidden shadow-lg bg-white">
+    <div class="flex-grow">
+      <img class="w-full h-48 object-cover" :src="item.productImage" alt="Card Image" />
+      <div class="px-6 py-4">
+        <h3 class="font-bold text-xl mb-2">{{ item.productName }}</h3>
+        <p class="text-gray-700 text-base">{{ item.price }}</p>
+        <!-- <p class="text-gray-700 text-base">{{ item.pricePerUnit }}</p> -->
+      </div>
     </div>
     <div class="px-6 py-4">
       <button
         class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-        @click="handleClick"
+        @click="handleClick(item)"
       >
         Buy
       </button>
@@ -78,7 +80,13 @@ export default {
     }
   },
   methods: {
-    handleClick() {
+    handleClick(item) {
+      console.log(item.company)
+      if (item.company === 'superdrug') {
+        const url = `https://superdrug.com${item.url}`
+        // window.open('https://www.external-site.com', '_blank')
+        window.open(url, '_blank')
+      }
       this.showModal = true
     },
     handlePurchaseConfirmation(value) {

@@ -100,12 +100,10 @@ export default {
 
       this.loading = true
 
-
       const result = searchService.getTescoData(this.searchQuery).then((res) => {
         this.productsTesco = res.data
         this.loading = false
       })
-
 
       let finalQuery = ''
       if (this.superDrugQuery) {
@@ -150,6 +148,6 @@ export default {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   grid-template-rows: repeat(3, 1fr);
-  gap: 16px;
+  gap: 2rem;
 }
 </style>
