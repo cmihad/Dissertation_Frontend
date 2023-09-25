@@ -99,10 +99,13 @@ export default {
       }
 
       this.loading = true
+
+
       const result = searchService.getTescoData(this.searchQuery).then((res) => {
         this.productsTesco = res.data
         this.loading = false
       })
+
 
       let finalQuery = ''
       if (this.superDrugQuery) {

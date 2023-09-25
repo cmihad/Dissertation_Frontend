@@ -31,6 +31,7 @@
       <div class="py-8">
         <br />
         <button class="btn bg-red-600" @click="closeAccount()">Delete your Account?</button>
+        <Modal v-model:showModal="showModal" @deleteAccount="handleAccountDeletion" />
       </div>
     </div>
   </div>
@@ -40,17 +41,32 @@
 import search from '../../components/Search.vue'
 import UserInfoUpdate from './UserInfoUpdate.vue'
 import orders from './Orders.vue'
-
+import Modal from '../../components/UI/Modal/DeleteModal.vue'
+import authService from '../../Requests/authService'
 export default {
   data() {
     return {
+      showModal: false,
       activeTab: 'search'
     }
   },
   components: {
     search,
     UserInfoUpdate,
-    orders
+    orders,
+    Modal
+  },
+  methods: {
+    closeAccount() {
+      this.showModal = true
+    },
+    handleAccountDeletion(value) {
+      if (value) {
+        authService.closeAccount().then((res) => {
+          this.$router.push('/user/register')
+        })
+      }
+    }
   }
 }
 </script>

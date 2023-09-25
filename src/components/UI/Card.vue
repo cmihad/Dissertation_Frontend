@@ -20,7 +20,7 @@
 
 <script>
 import authService from '../../Requests/authService'
-import Modal from './Modal.vue'
+import Modal from './Modal/Modal.vue'
 export default {
   data() {
     return {

@@ -15,8 +15,13 @@ const logOut = () => {
 const closeAccount = () => {
   const userData = JSON.parse(localStorage.getItem('userData'))
   const authToken = localStorage.getItem('authToken')
+  console.log(authToken, 'authtoken baby')
 
-  return axios.delete(`${url}/closeAccount?email=${userData.email}`, authToken)
+  return axios.delete(`${url}/user/closeAccount?email=${userData.email}`, {
+    headers: {
+      authorization: authToken
+    }
+  })
 }
 const getUserData = () => {
   const userData = JSON.parse(localStorage.getItem('userData'))

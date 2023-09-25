@@ -1,7 +1,4 @@
 <template>
-  <pre>
-    {{ orders }}
-  </pre>
   <div class="" v-if="orders.length === 0">
     <div class="">There is no Previous Orders</div>
   </div>
@@ -15,7 +12,7 @@
           <th>Product Price</th>
           <th>Purchase Date</th>
           <th>Buy Again</th>
-          <!-- <th>Review</th> -->
+          <th>Review</th>
         </tr>
       </thead>
       <tbody>
@@ -27,7 +24,9 @@
           <td>
             <button @click="removeUser(i.url)">Buy Again</button>
           </td>
-          <!-- <td>{{ i.purchaseDate }}</td> -->
+          <td>
+            <button @click="reviewProduct(i.url)">Review Product</button>
+          </td>
         </tr>
       </tbody>
     </table>
@@ -46,7 +45,10 @@ export default {
   },
 
   async created() {
-    const res = await authService.getOrdersById(4)
+    const user = localStorage.getItem('userData')
+    const userData = JSON.parse(user)
+    const id = userData.id
+    const res = await authService.getOrdersById(id)
     this.orders = res.data.data.orders.sort((a, b) => {
       return new Date(b.purchaseDate) - new Date(a.purchaseDate)
     })
@@ -57,6 +59,9 @@ export default {
   methods: {
     formatDate(date) {
       return helper.formatDate(date)
+    },
+    reviewProduct(a) {
+      console.log(a)
     }
   }
 }
