@@ -63,6 +63,11 @@ export default {
     handleAccountDeletion(value) {
       if (value) {
         authService.closeAccount().then((res) => {
+          this.$toast.open({
+            message: `Account deleted Successfully`,
+            type: 'success',
+            position: 'top-right'
+          })
           this.$router.push('/user/register')
         })
       }

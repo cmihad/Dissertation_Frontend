@@ -110,8 +110,7 @@ export default {
       this.$toast.open({
         message: `successfully logged in `,
         type: 'success',
-        position: 'top-right',
-        duration: 60000
+        position: 'top-right'
       })
     }
   }
