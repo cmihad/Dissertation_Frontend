@@ -26,6 +26,7 @@
                 <input
                   type="password"
                   class="custom_form_input"
+                  @keyup.enter="submitForm"
                   placeholder="Password"
                   v-model="model.password"
                 />

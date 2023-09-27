@@ -1,16 +1,21 @@
 <template>
   <div>
     <div class="search-container">
-      <input
-        v-model="searchQuery"
-        @keyup.enter="search"
-        placeholder="Search..."
-        class="search-input"
-      />
+      <div class="max-w-xs">
+        <input
+          v-model="searchQuery"
+          @keyup.enter="submitForm()"
+          type="text"
+          class="border rounded-lg p-2 w-full focus:outline-none focus:border-blue-500 focus:ring focus:ring-blue-200 max-w-md"
+          placeholder="Search..."
+        />
+        <button class="btn bg-blue-600 mt-3" @keyup.enter="submitForm()" @click="submitForm()">
+          search
+        </button>
+      </div>
 
-      <button class="btn bg-blue-600" @click="submitForm()">search</button>
       <div class="previous-searches">
-        <h4 class="sub_title_text text-left">Previous Searches:</h4>
+        <h4 class="sub_title_text text-left font-black">Previous Searches:</h4>
         <div
           v-for="i in previousSearches.slice(-5)"
           :key="i.id"
@@ -24,17 +29,19 @@
       </div>
     </div>
 
+    <div class="space-y-4"></div>
+
     <div v-if="loading">
       <img src="../assets/Spinner-1s-200px.gif" alt="" />
     </div>
     <div v-else>
-      <h2>SuperDrug</h2>
+      <h2 class="font-bold text-3xl text-black py-4">SuperDrug</h2>
       <div class="grid-container">
         <div v-for="item in productSuperdrug" :key="item.id">
           <Card :item="item" />
         </div>
       </div>
-      <h2>Tesco</h2>
+      <h2 class="font-bold text-3xl text-black py-4">Tesco</h2>
       <div class="grid-container">
         <div v-for="item in productsTesco" :key="item.id">
           <Card :item="item" />

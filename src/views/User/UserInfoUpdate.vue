@@ -1,8 +1,8 @@
 <template>
-  <div class="container mx-auto sm:px-10">
+  <div class="container sm:px-10">
     <div class="xl:h-auto xl:my-10 bg-rgb-white xl:p-16 rounded-lg">
       <div
-        class="my-auto mx-auto bg-white xl:bg-transparent px-5 sm:px-8 py-8 xl:p-0 rounded-md shadow-md xl:shadow-none w-full sm:w-3/4 lg:w-3/4 xl:w-11/12"
+        class="my-auto mx-auto bg-white xl:bg-transparent px-5 sm:px-8 py-8 pl-0 rounded-md shadow-lg p-10 xl:shadow-lg w-full sm:w-3/4 lg:w-4/5 xl:w-4/5"
       >
         <div>
           <h2 class="intro-x font-bold text-2xl xl:text-3xl text-center xl:text-left">

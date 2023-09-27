@@ -68,6 +68,8 @@ export default {
             type: 'success',
             position: 'top-right'
           })
+          localStorage.clear()
+          this.$store.commit('logout')
           this.$router.push('/user/register')
         })
       }
