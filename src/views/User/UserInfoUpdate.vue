@@ -176,11 +176,15 @@ export default {
           response.then((res) => {
             this.userData = res.data.userData
           })
+          this.$store.commit('isUserInfoUpdated')
         }
       })
     }
   },
   created() {
+    if (this.profile !== null) {
+      this.$store.commit('isUserInfoUpdated')
+    }
     const response = authService.getUserData()
     response.then((res) => {
       this.userData = res.data.userData

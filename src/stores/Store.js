@@ -3,7 +3,8 @@ import Vuex from 'vuex'
 export default new Vuex.Store({
   state: {
     isLoggedIn: false,
-    adminToken: ''
+    adminToken: '',
+    isUserInfoUpdate: false
     // your state here
   },
   mutations: {
@@ -12,6 +13,9 @@ export default new Vuex.Store({
     },
     logout(state) {
       state.isLoggedIn = false // Set isLoggedIn to false on logout
+    },
+    isUserInfoUpdate(state) {
+      state.isUserInfoUpdate = true
     }
   },
   actions: {
